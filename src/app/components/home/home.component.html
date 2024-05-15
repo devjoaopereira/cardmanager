@@ -1,0 +1,27 @@
+<header class="header">
+    <h1>Card Manager</h1>
+</header>
+
+<section class="home-section">
+    <form class="card-form" [formGroup]="cardForm">
+        <div class="input-name">
+            <label for="name">Name:</label>
+            <input id="name" type="text" formControlName="name">
+        </div>
+
+        <div class="input-block">
+            <label for="">Block:</label>
+            <select id="block" formControlName="block">
+                <option value="amonkhet">Amonkhet</option>
+                <option value="ixalan">Ixalan</option>
+                <option value="zendikar">Zendikar</option>
+                <option value="ravnica">Ravnica</option>
+                <option value="onslaught">Onslaught</option>
+            </select>
+        </div>
+
+        <div class="input-button">
+            <button class="button-submit" type="submit">Buscar</button>
+        </div>
+    </form>
+</section>
