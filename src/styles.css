@@ -1,12 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 :root {
-    --primary-color: #4a03c1;
-    --secondary-color: #6566cd;
+    --primary-color: #8c4c1c;
+    --secondary-color: #cc8030;
+    --terciary-color: #644f3a;    ;
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body {
+    background-color: #e2dcd5;
+    font-family: "Poppins", sans-serif;
+}
+
+.text-red {
+    color: red;
+}
+
+.loader {
+    height: 45px;
+    --c:no-repeat linear-gradient(var(--secondary-color) 0 0);
+    background: 
+        var(--c) left,
+        var(--c) center,
+        var(--c) right;
+    background-size: 16px 100%;
+    animation: 
+        l33-1 1.5s infinite,
+        l33-2 1.5s infinite;
+}
+@keyframes l33-1 {
+    0%,100% {width:45px}
+    35%,65% {width:65px}
+}
+@keyframes l33-2 {
+    0%,40%  {transform: rotate(0) }
+    60%,100%{transform: rotate(90deg) }
 }
