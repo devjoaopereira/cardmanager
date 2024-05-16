@@ -21,4 +21,8 @@
         <div class="loader"></div>
         <p>Creating your card deck. Please be patient...</p>
     </ng-container>
+
+    <div [ngClass]="{ 'toast-show': showToastError }" class="toast-error">
+        No cards found for this collection
+    </div>
 </section>
