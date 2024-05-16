@@ -1,7 +1,7 @@
 <section class="collection-section">
-    <div class="set-container">
+    <div class="set-container" *ngIf="!loading">
         <ng-container *ngFor="let set of setArray">
-            <div class="set-self">
+            <div class="set-self" (click)="getBoostersData(set.code)">
                 <div class="set-header">
                     <div class="set-title">
                         {{ set.name }}
@@ -16,4 +16,9 @@
             </div>
         </ng-container>
     </div>
+
+    <ng-container *ngIf="loading">
+        <div class="loader"></div>
+        <p>Creating your card deck. Please be patient...</p>
+    </ng-container>
 </section>
