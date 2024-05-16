@@ -109,3 +109,13 @@
     color: #fff;
     text-transform: uppercase;
 }
+
+@media (max-width: 576px) {
+    .deck-container .card-self {
+        max-width: 380px;
+    }
+
+    .card-self .card-title {
+        word-break: break-word;
+    }
+}
