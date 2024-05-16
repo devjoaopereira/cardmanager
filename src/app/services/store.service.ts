@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class StoreService {
-  private _storedData: any;
+	private _storedData: any;
 
-  constructor() { }
+	constructor() { }
 
-  setDataStore(data: any): void {
-    this._storedData = data;
-  }
+	setDataStore(data: any): void {
+		this._storedData = data;
+	}
 
-  getDataStore(): any {
-    return this._storedData;
-  }
+	getDataStore(): any {
+		return this._storedData;
+	}
 }

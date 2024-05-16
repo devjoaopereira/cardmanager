@@ -13,7 +13,7 @@
                     <div class="card-icon">
                         <ng-container *ngFor="let color of card.colorIdentity">
                             <div class="bg-b" *ngIf="color === 'B'"></div>
-                            <div class="bg-g" *ngIf="color === 'G'" ></div>
+                            <div class="bg-g" *ngIf="color === 'G'"></div>
                             <div class="bg-r" *ngIf="color === 'R'"></div>
                             <div class="bg-u" *ngIf="color === 'U'"></div>
                         </ng-container>
@@ -21,7 +21,7 @@
                     <div class="card-title">
                         {{ card.name }}
                     </div>
-                    <div class="card-manacost"> 
+                    <div class="card-manacost">
                         {{ card.manaCost }}
                     </div>
                     <div class="card-text">
@@ -31,5 +31,7 @@
             </div>
         </ng-container>
     </div>
-    <button class="button-generate" [routerLink]="['/']" *ngIf="cardArray && cardArray.length">Generate new deck</button>
+    <button class="button-generate" [routerLink]="['/']" *ngIf="cardArray && cardArray.length">
+        Generate new deck
+    </button>
 </section>

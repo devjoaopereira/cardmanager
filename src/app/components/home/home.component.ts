@@ -9,60 +9,60 @@ import { CollectionComponent } from '../collection/collection.component';
 import { HeaderComponent } from '../header/header.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    NgIf,
-    CollectionComponent,
-    HeaderComponent
-  ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+	selector: 'app-home',
+	standalone: true,
+	imports: [
+		FormsModule,
+		ReactiveFormsModule,
+		NgIf,
+		CollectionComponent,
+		HeaderComponent
+	],
+	templateUrl: './home.component.html',
+	styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  public loading: boolean;
-  public setArray: SetInterface[];
+	public loading: boolean;
+	public setArray: SetInterface[];
 
-  private _form: CardForm;
-  
-  constructor(private magicTheGatheringService: MagicTheGatheringService) {
-    this.loading = false;
-    this.setArray = [];
-    this._form = new CardForm();
-  }
+	private _form: CardForm;
 
-  public get cardForm(): CardForm {
-    return this._form;
-  }
+	constructor(private magicTheGatheringService: MagicTheGatheringService) {
+		this.loading = false;
+		this.setArray = [];
+		this._form = new CardForm();
+	}
 
-  public onSearchSet() {
-    this.cardForm.name?.markAsDirty();
-    this.cardForm.block?.markAsDirty();
+	public get cardForm(): CardForm {
+		return this._form;
+	}
 
-    if (this.cardForm.valid) {
-      this.loading = true;
-      this.getSetsData();
-    }
-  }
+	public onSearchSet() {
+		this.cardForm.name?.markAsDirty();
+		this.cardForm.block?.markAsDirty();
 
-  public getSetsData(): void {
-    this.magicTheGatheringService
-      .getSets(this.cardForm.getDadosForm())
-      .pipe(
-        finalize(() => {
-          this.loading = false;
-        }),
-        take(1)
-      )
-      .subscribe({
-        next: (response) => {
-          if (response) this.setArray = response.sets;
-        },
-        error: () => {
-          console.error('Ocorreu um erro inesperado...');
-        }
-      })
-  }
+		if (this.cardForm.valid) {
+			this.loading = true;
+			this.getSetsData();
+		}
+	}
+
+	public getSetsData(): void {
+		this.magicTheGatheringService
+			.getSets(this.cardForm.getDadosForm())
+			.pipe(
+				finalize(() => {
+					this.loading = false;
+				}),
+				take(1)
+			)
+			.subscribe({
+				next: (response) => {
+					if (response) this.setArray = response.sets;
+				},
+				error: () => {
+					console.error('Ocorreu um erro inesperado...');
+				}
+			})
+	}
 }
