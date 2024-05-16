@@ -1,0 +1,19 @@
+<section class="collection-section">
+    <div class="set-container">
+        <ng-container *ngFor="let set of setArray">
+            <div class="set-self">
+                <div class="set-header">
+                    <div class="set-title">
+                        {{ set.name }}
+                    </div>
+                    <div class="set-subtitle">
+                        {{ set.block }}
+                    </div>
+                </div>
+                <div class="set-footer">
+                    {{ set.releaseDate | date:'dd/MM/yyyy' }}
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</section>
