@@ -29,7 +29,10 @@
         </div>
     </form>
 
-    <div class="loader" *ngIf="loading"></div>
+    <ng-container *ngIf="loading">
+        <div class="loader"></div>
+        <p>Wait a moment...</p>
+    </ng-container>
 </section>
 
 <ng-container *ngIf="!loading && setArray.length">

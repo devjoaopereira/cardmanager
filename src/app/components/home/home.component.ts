@@ -2,7 +2,7 @@ import { Component, afterNextRender } from '@angular/core';
 import { CardForm } from './card-form.form';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MagicTheGatheringService } from '../../services/magic-the-gathering.service';
-import { finalize } from 'rxjs';
+import { finalize, take } from 'rxjs';
 import { NgIf } from '@angular/common';
 import { SetInterface } from '../../interfaces/set-interface.interface';
 import { CollectionComponent } from '../collection/collection.component';
@@ -53,7 +53,8 @@ export class HomeComponent {
       .pipe(
         finalize(() => {
           this.loading = false;
-        })
+        }),
+        take(1)
       )
       .subscribe({
         next: (response) => {
