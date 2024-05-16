@@ -1,4 +1,5 @@
 import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
+import { CardFormInterface } from "../../interfaces/card-form-interface.interface";
 
 export class CardForm extends FormGroup {
     constructor() {
@@ -14,5 +15,18 @@ export class CardForm extends FormGroup {
 
     public get block(): AbstractControl | null {
         return this.get('block');
+    }
+
+    public getDadosForm(): CardFormInterface {
+        this.deleteValuesNull();
+        return this.value;
+    }
+
+    private deleteValuesNull(): void {
+        for (const control in this.value) {
+            if (this.value[control] === null || this.value === "") {
+                delete this.value[control];
+            }
+        }
     }
 }

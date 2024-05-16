@@ -1,26 +1,67 @@
-import { Component, OnInit } from '@angular/core';
-import { CardForm } from './card-form';
+import { Component, afterNextRender } from '@angular/core';
+import { CardForm } from './card-form.form';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MagicTheGatheringService } from '../../services/magic-the-gathering.service';
+import { finalize } from 'rxjs';
+import { NgIf } from '@angular/common';
+import { SetInterface } from '../../interfaces/set-interface.interface';
+import { CollectionComponent } from '../collection/collection.component';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    NgIf,
+    CollectionComponent,
+    HeaderComponent
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+  public loading: boolean;
+  public setArray: SetInterface[];
+
   private _form: CardForm;
   
-  constructor() {
+  constructor(private magicTheGatheringService: MagicTheGatheringService) {
+    this.loading = false;
+    this.setArray = [];
     this._form = new CardForm();
-  }
-
-  ngOnInit() {
-    
   }
 
   public get cardForm(): CardForm {
     return this._form;
+  }
+
+  public onSearchSet() {
+    this.cardForm.name?.markAsDirty();
+    this.cardForm.block?.markAsDirty();
+
+    if (this.cardForm.valid) {
+      this.loading = true;
+      this.getSetsData();
+    }
+  }
+
+  public getSetsData(): void {
+    this.magicTheGatheringService
+      .getSets(this.cardForm.getDadosForm())
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          if (response) this.setArray = response.sets;
+        },
+        error: () => {
+          console.error('Ocorreu um erro inesperado...');
+        }
+      })
   }
 }

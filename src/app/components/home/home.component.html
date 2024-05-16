@@ -1,27 +1,37 @@
-<header class="header">
-    <h1>Card Manager</h1>
-</header>
+<app-header></app-header>
 
 <section class="home-section">
-    <form class="card-form" [formGroup]="cardForm">
+    <form class="card-form" [formGroup]="cardForm" (ngSubmit)="onSearchSet()">
         <div class="input-name">
             <label for="name">Name:</label>
             <input id="name" type="text" formControlName="name">
         </div>
 
         <div class="input-block">
-            <label for="">Block:</label>
+            <label for="">Block: *</label>
             <select id="block" formControlName="block">
+                <option value="" [selected]="'true'">Select one...</option>
                 <option value="amonkhet">Amonkhet</option>
                 <option value="ixalan">Ixalan</option>
                 <option value="zendikar">Zendikar</option>
                 <option value="ravnica">Ravnica</option>
                 <option value="onslaught">Onslaught</option>
             </select>
+            <div *ngIf="cardForm.controls['block'].dirty && cardForm.controls['block'].invalid">
+                <strong class="text-red" *ngIf="cardForm.controls['block'].errors?.['required']">
+                    O campo Block é obrigatório
+                </strong>
+            </div>
         </div>
 
         <div class="input-button">
             <button class="button-submit" type="submit">Buscar</button>
         </div>
     </form>
+
+    <div class="loader" *ngIf="loading"></div>
 </section>
+
+<ng-container *ngIf="!loading && setArray.length">
+    <app-collection [setArray]="setArray"></app-collection>
+</ng-container>
