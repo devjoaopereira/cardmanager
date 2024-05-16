@@ -1,4 +1,4 @@
-import { Component, afterNextRender } from '@angular/core';
+import { Component } from '@angular/core';
 import { CardForm } from './card-form.form';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MagicTheGatheringService } from '../../services/magic-the-gathering.service';
@@ -24,12 +24,14 @@ import { HeaderComponent } from '../header/header.component';
 export class HomeComponent {
 	public loading: boolean;
 	public setArray: SetInterface[];
+	public showMsgError: boolean;
 
 	private _form: CardForm;
 
 	constructor(private magicTheGatheringService: MagicTheGatheringService) {
 		this.loading = false;
 		this.setArray = [];
+		this.showMsgError = false;
 		this._form = new CardForm();
 	}
 
@@ -43,6 +45,8 @@ export class HomeComponent {
 
 		if (this.cardForm.valid) {
 			this.loading = true;
+			this.showMsgError = false;
+			this.setArray = [];
 			this.getSetsData();
 		}
 	}
@@ -58,7 +62,11 @@ export class HomeComponent {
 			)
 			.subscribe({
 				next: (response) => {
-					if (response) this.setArray = response.sets;
+					if (response && response.sets.length) {
+						this.setArray = response.sets
+					} else {
+						this.showMsgError = true;
+					};
 				},
 				error: () => {
 					console.error('Ocorreu um erro inesperado...');

@@ -33,6 +33,10 @@
         <div class="loader"></div>
         <p>Wait a moment...</p>
     </ng-container>
+
+    <p class="msg-error text-red" *ngIf="showMsgError">
+        No parameters found, please try again.
+    </p>
 </section>
 
 <ng-container *ngIf="!loading && setArray.length">
