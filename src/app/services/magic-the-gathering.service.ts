@@ -22,4 +22,10 @@ export class MagicTheGatheringService {
 
     return this.http.get(`${this._api}/sets`, { headers, params });
   }
+
+  getBoosters(id: string): Observable<any> {
+    let headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.get(`${this._api}/sets/${id}/booster`, { headers });
+  }
 }
