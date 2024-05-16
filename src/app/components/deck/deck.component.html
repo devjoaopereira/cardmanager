@@ -1,0 +1,35 @@
+<app-header></app-header>
+
+<section class="deck-section">
+    <h2>Your cards from the open pack</h2>
+    <button class="button-generate" [routerLink]="['/']">Generate new deck</button>
+    <div class="deck-container" *ngIf="cardArray && cardArray.length">
+        <ng-container *ngFor="let card of cardArray">
+            <div class="card-self">
+                <div class="card-image">
+                    <img src="{{ card.imageUrl }}" alt="Carta">
+                </div>
+                <div class="card-body">
+                    <div class="card-icon">
+                        <ng-container *ngFor="let color of card.colorIdentity">
+                            <div class="bg-b" *ngIf="color === 'B'"></div>
+                            <div class="bg-g" *ngIf="color === 'G'" ></div>
+                            <div class="bg-r" *ngIf="color === 'R'"></div>
+                            <div class="bg-u" *ngIf="color === 'U'"></div>
+                        </ng-container>
+                    </div>
+                    <div class="card-title">
+                        {{ card.name }}
+                    </div>
+                    <div class="card-manacost"> 
+                        {{ card.manaCost }}
+                    </div>
+                    <div class="card-text">
+                        <p>{{ card.text }}</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <button class="button-generate" [routerLink]="['/']" *ngIf="cardArray && cardArray.length">Generate new deck</button>
+</section>
