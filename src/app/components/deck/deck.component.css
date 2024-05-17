@@ -58,32 +58,31 @@
     margin-top: 20px;
 }
 
-.bg-b {
+.bg-b,
+.bg-g,
+.bg-r,
+.bg-u {
     margin: 0px 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+
+.bg-b {
     background-image: url('/assets/images/b.webp');
-    width: 15px;
-    height: 15px;
 }
 
 .bg-g {
-    margin: 0px 5px;
     background-image: url('/assets/images/g.png');
-    width: 15px;
-    height: 15px;
 }
 
 .bg-r {
-    margin: 0px 5px;
     background-image: url('/assets/images/r.webp');
-    width: 15px;
-    height: 15px;
 }
 
 .bg-u {
-    margin: 0px 5px;
     background-image: url('/assets/images/u.webp');
-    width: 15px;
-    height: 15px;
 }
 
 .button-generate {
